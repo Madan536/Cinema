@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link th:href="@{css/sidebar.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+}
+:root{
+    --bg-color:#222327;
+    --text-color:#fff;
+    --text1-color:black;
+    --main-color:#29fd53;
+ }
+body{
+    display: flex;
+    align-items: start;
+    background-color:var(--bg-color);
+}
+.sidebar{
+    position:sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 105px;
+    min-height: 100vh;
+    padding:  0 1.7rem;
+    color: var(--text-color);
+    overflow: hidden;
+    transition: all .9s linear;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.logo{
+    padding: 30px 0;
+}
+.sidebar:hover{
+    width: 300px;
+    transition: .9s;
+}
+.menu{
+   height: 88%;
+   position: relative;
+   list-style: none;
+   padding: 0;
+}
+.menu li{
+    padding: 1rem;
+    margin: 8px 0;
+    border-radius: 8px;
+    transition: all 0.8s ease-in-out;
+}
+.menu li:hover,.active{
+    /* background-color: var(--main-color); */
+    background: #e0e0e058;
+}
+.menu a{
+    color: var(--text-color);
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+}
+.menu a span{
+    overflow: hidden;
+}
+
+
+/* ------main content--------- */
+.main--content{
+    position: relative;
+    /* background: rgba(255, 255,255,0.1); */
+    width: 100%;
+    padding: 1rem;
+    /* background-color: #222327; */
+}
+.header--wrapper img{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.header--wrapper{
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+   background-color: var(--text-color);
+    border-radius: 10px;
+    padding: 10px 2rem;
+    margin-bottom: 1rem;
+    z-index: 1;
+}
+
+.header--title{
+    color: var(--bg-color);
+}
+.user--info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.search--box{
+    background: rgb(237,237,237);
+    border-radius: 15px;
+    color: rgba(113,99,186,255);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+}
+.search--box .input{
+    background: transparent;
+    padding: 10px;
+    margin-right: 10px;
+}
+.search--box i{
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.8 ease-out;
+}
+.search--box i:hover{
+    transform: scale(1.2);
+}
+.search--box form .submit{
+   color: var(--bg-color);
+   margin-top:-10px;
+   padding: 2px;
+   border-radius: 50%;
+   border: 1px solid;
+}
+.search--box form .submit:hover{
+    transform: scale(1.5);
+}
+
+
+/*------- Cad containers --------- */
+
+.card-fullcontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.card--container{
+    /* background: red; */
+    height: 350px;
+    width: 200px;
+    position: relative;
+    border-radius: 20px;
+    transition: 0.5s ease-in;
+}
+.card--container:hover{
+    box-shadow: 0 0 7px var(--text-color);
+    height: 360px;
+}
+.card--container .image{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 5px 40px 5px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+}
+.card--container .image img{
+    width: 150px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+}
+.card--container .image .title{
+    color: var(--text-color);
+    padding: 20px;
+}
+.doc form input{
+    padding: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all .5s ease-in;
+}
+.doc form input:hover{
+    font-weight: 600;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    cursor: pointer;
+}
+
+            <!--Cinema Screen-->
+
+.card-fullcontainer{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 100vh;
+ }
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    width: 650px;
+    border-radius: 20px;
+    position: relative;
+ }
+ .movie-timing{
+    position: absolute;
+    top: 0;
+    left: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-right: 20px;
+ }
+ .date,.Time{
+    background: #fff;
+    border: none;
+    padding: 10px;
+    margin-right: 20px;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    font-weight: 500;
+ }
+ .Time option{
+    background: var(--bg-color);
+    color: var(--text-color);
+ }
+ .movie-title{
+    font-size: 20px;
+    padding: 20px;
+    color: var(--text-color);
+    text-align: center;
+ }
+ .screen{
+    width: 250px;
+    height: 100px;
+    background: #000000;
+    margin-left: 80px;
+    border: 1px solid var(--text-color);
+   border-radius: 10px;
+ }
+ .screen:hover{
+    transform: scale(1.1);
+ }
+ .seats{
+     display: flex;
+     padding: 10px;
+     margin-top: 10px;
+     margin-left: 8px;
+     align-items: center;
+     position: relative;
+
+ }
+ .seats .seat{
+    margin-right: 30px;
+
+}
+ .seats .seat label{
+    background-color:var(--text-color);
+    border: 2px solid green;
+    border-radius: 5px;
+    padding: 4px 6px;
+    position: absolute;
+    top: 5px;
+    margin-left: -15px;
+    cursor: pointer;
+    transition: .5s;
+ }
+
+ .seats .seat input[type=checkbox]:disabled + label {
+    background: rgb(137, 24, 24);
+    color: var(--text-color);
+    border: 2px solid var(--bg-color);
+    cursor: not-allowed;
+ }
+
+ .seats .seat label:hover{
+    background: green;
+    color: var(--text-color);
+ }
+ .seats .seat input[type=checkbox]:checked + label {
+    background: green;
+    color: var(--text-color);
+ }
+ .seats .seat input[type=checkbox]:checked + input[type=submit]:target {
+    color: #000000;
+ }
+ input[type=submit]{
+    padding: 10px 50px;
+    margin-left: 120px;
+    margin-top: 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    background: transparent;
+    border: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    cursor: pointer;
+ }
+ input[type=submit]:hover{
+    background:#fff;
+    color: #000000;
+ }
+.seatselects{
+    margin-top: 160px;
+    padding: 30px;
+    border-radius: 20px;
+     position: relative;
+}
+.seatselects span{
+    color: #fff;
+}
+.seatselects .seat-unselect{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+.seatselects .seat-unselect .seat-un{
+    background:rgba(187, 23, 23, 0.733);
+    width: 30px;
+    height: 30px;
+    color: var(--text-color);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+.seatselects .seat-unselect .seat-se{
+    background:var(--text-color);
+    width: 30px;
+    height: 30px;
+    color: #000000;
+    border: 2px solid green;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.seatselects .seat-unselect label{
+    color: #fff;
+    margin-left: 15px;
+    font-size:10px;
+}
+.booked{
+background:red;
+}
+
+input[type=submit]:disabled{
+cursor: not-allowed;
+}
+
+
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <lable>SAKTHI <span>CINEMA</span></lable>
+    </div>
+    <ul id="id" class="menu">
+        <li id="id1">
+            <a th:href="@{/User/User-Pages}">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/User/Profile}">
+                <i class="fa-solid fa-user"></i>
+                <span>profile</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/User/User-change-password}">
+                <i class="fa-solid fa-lock"></i>
+                <span>Change Password</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/User/Tickets}">
+                <i class="fa-solid fa-ticket"></i>
+                <span>My Tickets</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/User/service}">
+                <i class="fa-solid fa-repeat"></i>
+                <span>Service</span>
+            </a>
+        </li>
+        <li class="logout">
+            <a th:href="@{/logout}">
+                <i class="fa-solid fa-right-from-bracket fa-rotate-180"></i>
+                <span>logout</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- main--content -->
+<div class="main--content">
+    <div class="header--wrapper">
+        <div class="header--title">
+            <span>Hello</span>
+            <h2 th:text="${session.username}">User Name</h2>
+        </div>
+        <div class="user--info">
+            <div class="search--box">
+                <i class="fa-solid fa-magnifying-glass">
+                </i>
+                <form th:action="Movie-search">
+                    <input type="hidden" th:value="${MovieName}" name="MovieName">
+                    <input class="input" type="search" name="search"
+                           placeholder="Search" id="">
+                    <input class="submit" type="submit" value="Go">
+                </form>
+            </div>
+                        <img th:src="${userimage}" alt="">
+        </div>
+    </div>
+
+    <!-- card container -->
+    <div class="card-fullcontainer">
+        <div class="container">
+            <form th:action="seat-check" method="post" id="forms">
+                <div class="movie-timing">
+                    <input type="hidden" th:value="${MovieName}" name="MovieName">
+                    <input class="date" type="date" name="Date" th:value="${session.date}" id="date" required>
+                    <select class="Time" name="Time" id="time" required>
+                        <option th:value="${session.time}" th:text="${session.time}"><span th:if="${session.time}">Timing</span>Timing</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="2:00 PM">2:00 PM</option>
+                        <option value="6:00 PM">6:00 PM</option>
+                        <option value="10:00 PM">10:00 PM</option>
+                    </select>
+                </div>
+            </form>
+            <form th:action="Movie-seat-Booking" th:method="Post">
+                <input type="hidden" th:value="${MovieName}" name="MovieName">
+                <div class="movie-title">
+                    <span> Movie Name :</span>
+                    <label  th:text="${MovieName}">
+                    </label><br>
+                </div>
+
+                <div class="screen"></div>
+                <div class="seats">
+                    <div class="seat booked">
+                        <input type="checkbox" name="seat" id="1A" value="1A"  th:disabled="${#strings.contains(check, '1A')}"/>
+                        <label for="1A">1A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="2A" value="2A" th:disabled="${#strings.contains(check, '2A')}"/>
+                        <label for="2A">2A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="3A" value="3A" th:disabled="${#strings.contains(check, '3A')}"/>
+                        <label for="3A">3A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="4A" value="4A" th:disabled="${#strings.contains(check, '4A')}"/>
+                        <label for="4A">4A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="5A" value="5A" th:disabled="${#strings.contains(check, '5A')}"/>
+                        <label for="5A">5A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="6A" value="6A" th:disabled="${#strings.contains(check, '6A')}"/>
+                        <label for="6A">6A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="7A" value="7A" th:disabled="${#strings.contains(check, '7A')}"/>
+                        <label for="7A">7A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="8A" value="8A" th:disabled="${#strings.contains(check, '8A')}"/>
+                        <label for="8A">8A</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="9A" value="9A" th:disabled="${#strings.contains(check, '9A')}"/>
+                        <label for="9A">9A</label>
+                    </div>
+                </div>
+                <!-- Seund row -->
+                <div class="seats">
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="1B" value="1B" th:disabled="${#strings.contains(check, '1B')}"/>
+                        <label for="1B">1B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="2B" value="2B" th:disabled="${#strings.contains(check, '2B')}"/>
+                        <label for="2B">2B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="3B" value="3B" th:disabled="${#strings.contains(check, '3B')}"/>
+                        <label for="3B">3B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="4B" value="4B" th:disabled="${#strings.contains(check, '4B')}"/>
+                        <label for="4B">4B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="5B" value="5B" th:disabled="${#strings.contains(check, '5B')}"/>
+                        <label for="5B">5B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="6B" value="6B" th:disabled="${#strings.contains(check, '6B')}"/>
+                        <label for="6B">6B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="7B" value="7B" th:disabled="${#strings.contains(check, '7B')}"/>
+                        <label for="7B">7B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="8B" value="8B" th:disabled="${#strings.contains(check, '8B')}"/>
+                        <label for="8B">8B</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="9B" value="9B" th:disabled="${#strings.contains(check, '9B')}"/>
+                        <label for="9B">9B</label>
+                    </div>
+                </div>
+                <!-- Second row -->
+
+                <div class="seats">
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="1C" value="1C" th:disabled="${#strings.contains(check, '1C')}"/>
+                        <label for="1C">1C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="2C" value="2B" th:disabled="${#strings.contains(check, '2C')}"/>
+                        <label for="2C">2C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="3C" value="3C" th:disabled="${#strings.contains(check, '3C')}"/>
+                        <label for="3C">3C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="4C" value="4C" th:disabled="${#strings.contains(check, '4C')}"/>
+                        <label for="4C">4C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="5C" value="5C" th:disabled="${#strings.contains(check, '5C')}"/>
+                        <label for="5C">5C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="6C" value="6C" th:disabled="${#strings.contains(check, '6C')}"/>
+                        <label for="6C">6C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="7C" value="7C" th:disabled="${#strings.contains(check, '7C')}"/>
+                        <label for="7C">7C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="8C" value="8C" th:disabled="${#strings.contains(check, '8C')}"/>
+                        <label for="8C">8C</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="9C" value="9C" th:disabled="${#strings.contains(check, '9C')}"/>
+                        <label for="9C">9C</label>
+                    </div>
+                </div>
+
+                <!-- last row -->
+                <div class="seats">
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="1D" value="1D" th:disabled="${#strings.contains(check, '1D')}"/>
+                        <label for="1D">1D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="2D" value="2D" th:disabled="${#strings.contains(check, '2D')}"/>
+                        <label for="2D">2D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="3D" value="3D" th:disabled="${#strings.contains(check, '3D')}"/>
+                        <label for="3D">3D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="4D" value="4D" th:disabled="${#strings.contains(check, '4D')}"/>
+                        <label for="4D">4D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="5D" value="5D" th:disabled="${#strings.contains(check, '5D')}"/>
+                        <label for="5D">5D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="6D" value="6D" th:disabled="${#strings.contains(check, '6D')}"/>
+                        <label for="6D">6D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="7D" value="7D" th:disabled="${#strings.contains(check, '7D')}"/>
+                        <label for="7D">7D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="8D" value="8D" th:disabled="${#strings.contains(check, '8D')}"/>
+                        <label for="8D">8D</label>
+                    </div>
+                    <div class="seat">
+                        <input type="checkbox" name="seat" id="9D" value="9D" th:checked="${#strings.contains(check, '9D')}" th:disabled="${#strings.contains(check, '9D')}"/>
+                        <label for="9D">9D</label>
+                    </div>
+                </div>
+<!--                th:if="${#strings.contains(date,'null')}"-->
+                <input id="sum" th:if="${date !='null'}"
+                        type="submit" value="Payment">
+            </form>
+            <div class="seatselects">
+                <span>First Class :<label>120</label></span><br><br>
+                <span>Total Price : <label id="all">0</label></span>
+                <div class="seat-unselect">
+                    <div class="seat-un">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+                    <label>Already Booked</label>
+                </div>
+                <div class="seat-unselect">
+                    <div class="seat-se">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+                    <label> Seat Available</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("date").onchange = function() {
+			document.getElementById("forms").submit();
+		}
+
+		document.getElementById("time").onchange = function() {
+			document.getElementById("forms").submit();
+		}
+
+		var total = 0;
+		var seat = [];
+        const myPrice = document.getElementById('all');
+		const checkBox = document.querySelectorAll('input[type="checkbox"]');
+		for (var i = 0; i < checkBox.length; i++) {
+			checkBox[i].addEventListener('click', displayValue);
+
+		}
+		function displayValue(e) {
+			var myValue = 120;
+			if (e.target.checked == true) {
+				total += myValue;
+			} else {
+				total -= myValue;
+			}
+			myPrice.innerText = total;
+		}
+</script>
+
+
+
+</body>
+</html>

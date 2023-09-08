@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link th:href="@{css/sidebar.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <lable>SAKTHI <span>CINEMA</span></lable>
+    </div>
+    <ul id="id" class="menu">
+        <li id="id1">
+            <a th:href="@{/}">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/User-Register}">
+                <i class="fa-solid fa-user"></i>
+                <span>Register</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/contact}">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contact</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/Add/Movie}">
+                <i class="fa-solid fa-repeat"></i>
+                <span>Add Movie</span>
+            </a>
+        </li>
+        <li class="logout">
+            <a th:href="@{/login}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>login</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- main--content -->
+<div class="main--content">
+    <div class="header--wrapper">
+        <div class="header--title">
+            <span>Welcome to</span>
+            <h2>SAKTHI CINEMA</h2>
+        </div>
+        <div class="user--info">
+            <div class="search--box">
+                <i class="fa-solid fa-magnifying-glass">
+                </i>
+                <form th:action="Home-search" id="searchform">
+                    <input class="input" type="search" id="search" name="search"
+                           placeholder="Search">
+                    <input class="submit" type="submit" value="Go">
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- card container -->
+    <div class="card-fullcontainer">
+        <div th:each="movie : ${Movies}" class="card--container">
+            <div class="image">
+                <img th:src="${movie.MovieImage}" alt="">
+                <div th:text="${movie.MovieName}" class="title">
+                    Movie name...
+                </div>
+                <div class="doc">
+                    <form th:action="@{/User/Movie-CinemaScreen}">
+                        <input type="hidden" name="MovieName" th:value="${movie.MovieName}" >
+                        <input type="submit" value="Booking Now">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("li").click(function(){
+        $("li").removeClass("active");
+        $(this).addClass("active");
+    });
+<!--     document.getElementById("search").onchange = function() {-->
+<!--			document.getElementById("searchform").submit();-->
+<!--		}-->
+   </script>
+</body>
+</html>

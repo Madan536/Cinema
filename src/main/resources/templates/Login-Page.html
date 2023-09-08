@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <link th:href="@{/css/sidebar.css}" rel="stylesheet">
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css}"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+:root{
+    --bg-color:#222327;
+    --text-color:#fff;
+    --text1-color:black;
+ }
+ .card-fullcontainer{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 100vh;
+ }
+.login-container{
+    border-radius: 20px;
+    width: 300px;
+    padding:0 20px;
+    height: 490px;
+    position: fixed;
+    overflow: hidden;
+}
+.login-container h1{
+    color: var(--text-color);
+    text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid var(--text-color);
+    margin-bottom: 20px;
+}
+.login-container .input-box{
+    padding: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.login-container .input{
+    padding: 10px;
+    padding-left: 60px;
+    border-radius: 20px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+.login-container .input-box i{
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    font-weight: 600;
+    font-size: 23px;
+    border-right: 2px solid;
+    padding-right: 10px;
+    opacity: .9;
+}
+.forget{
+    padding: 10px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.forget label{
+    color: var(--text-color);
+    cursor: pointer;
+
+}
+input[type=checkbox],input[type=submit]{
+   cursor: pointer;
+}
+.forget a,.register-link a{
+    text-decoration: none;
+    color: rgb(11, 122, 233);
+}
+.forget a:hover,.register-link a:hover{
+   text-decoration: underline;
+}
+.input-box input[type=submit]{
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    background: var(--bg-color);
+    border: none;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    transition: .5s ease;
+}
+.register-link{
+    padding: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+.register-link p{
+font-size:1.1rem;
+}
+.input-box input[type=submit]:hover{
+    background: var(--text-color);
+    color: var(--bg-color);
+    font-weight: 600;
+}
+.notification{
+    color: var(--text-color);
+    padding: 10px;
+    background:rgba(255,255,255,0.2);
+    margin-bottom: 10px;
+    text-align:center;
+}
+
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <div class="logo">
+        <lable>SAKTHI <span>CINEMA</span></lable>
+    </div>
+    <ul id="id" class="menu">
+        <li id="id1">
+            <a th:href="@{/}">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/User-Register}">
+                <i class="fa-solid fa-user"></i>
+                <span>Register</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/contact}">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contact</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/Add/Movie}">
+                <i class="fa-solid fa-repeat"></i>
+                <span>Add Movie</span>
+            </a>
+        </li>
+        <li class="logout">
+            <a th:href="@{/login}">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>login</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- main--content -->
+<div class="main--content">
+    <div class="header--wrapper">
+        <div class="header--title">
+            <span>Welcome to</span>
+            <h2>SAKTHI CINEMA</h2>
+        </div>
+        <div class="user--info">
+            <div class="search--box">
+                <i class="fa-solid fa-magnifying-glass">
+                </i>
+                <form th:action="search">
+                    <input class="input" type="search" name="search"
+                           placeholder="Search" id="">
+                    <input class="submit" type="submit" value="Go">
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- card container -->
+    <div class="card-fullcontainer">
+        <div class="login-container">
+            <form th:action="login-process" th:method="Post">
+                <h1>login</h1>
+                <div  th:if="${param.logout}" class="notification alert alert-success">
+                    <strong>Success Logout!</strong>
+                </div>
+                <div th:if="${param.error}" class=" notification alert alert-danger">
+                    <strong>UserName and Password Invalid!</strong>
+                </div>
+                <div class="input-box">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" class="input"
+                           placeholder="User Name" name="username" required>
+                </div>
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" class="input"
+                           placeholder="password" name="password" required>
+                </div>
+                <div class="forget">
+                    <label><input type="checkbox" name="" id="" required>
+                        Remember Me</label>
+                    <a th:href="@{/forget}">Forget Password?</a>
+                </div>
+                <div class="input-box">
+                    <input type="submit" value="Login">
+                </div>
+                <div class="register-link">
+                    <p>Don't have an account?
+                        <a th:href="@{/User-Register}">Register</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    $("li").click(function(){
+        $("li").removeClass("active");
+        $(this).addClass("active");
+    });
+   </script>
+</body>
+</html>
